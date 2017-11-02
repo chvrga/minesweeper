@@ -30,9 +30,9 @@ public class View extends JPanel implements Observer {
         this.model = model;
         this.setLayout(new BorderLayout());
         this.view = new JPanel();
-        this.bombs = setLabel(this.bombs, "Bombs:  " + Integer.toString(model.remainingBombs()));
-        this.gameState = setLabel(this.gameState, "Status:  " + model.getState());
-        this.timer = setLabel(this.timer, "Time:  " + model.getTimer());
+        this.bombs = setLabel(this.bombs, "Bombs: ");
+        this.gameState = setLabel(this.gameState, "Status: ");
+        this.timer = setLabel(this.timer, "Time: ");
 
         this.add(this.bombs, BorderLayout.WEST);
         this.add(this.gameState, BorderLayout.EAST);
@@ -58,9 +58,9 @@ public class View extends JPanel implements Observer {
         if (o != null) {
             updateButtons();
         }
-        this.bombs = setLabel(this.bombs, "Bombs:  " + Integer.toString(model.remainingBombs()));
-        this.gameState = setLabel(this.gameState, "Status:  " + model.getState());
-        this.timer = setLabel(this.timer, "Time:  " + this.model.getTimer());
+        this.bombs = setLabel(this.bombs, "Bombs: ");
+        this.gameState = setLabel(this.gameState, "Status: ");
+        this.timer = setLabel(this.timer, "Time: ");
 
     }
 
@@ -96,8 +96,7 @@ public class View extends JPanel implements Observer {
     public JButton restartButton() {
         JButton button = new JButton("Restart");
         button.setPreferredSize(new Dimension(20, 40));
-        Controller controller = new Controller(model);
-        button.addMouseListener(controller);
+
         return button;
 
     }
