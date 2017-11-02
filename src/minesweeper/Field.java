@@ -77,25 +77,6 @@ public class Field extends Observable {
     }
 
     /**
-     * Changing the State
-     */
-    public void changeState() {
-        if (!this.is_flag && !this.getRevealed() && model.getState().equals("running")) {
-
-            this.is_flag = true;
-            this.model.subRemainingBombs();
-            this.setChanged();
-            this.notifyObservers();
-        } else if (!this.getRevealed() && model.getState().equals("running")) {
-            this.is_flag = false;
-            this.model.addRemainingBombs();
-            this.setChanged();
-            this.notifyObservers();
-        }
-
-    }
-
-    /**
      *
      * @return if the field is selected
      */

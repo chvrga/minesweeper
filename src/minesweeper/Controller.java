@@ -49,18 +49,8 @@ public class Controller extends MouseAdapter {
         switch (e.getButton()) {
             case MouseEvent.BUTTON1:
                 if (this.model == null) {
-                    if (!field.isFlag()) {
-                        field.reveal();
-
-                    }
-                } else {
-                    model.Init();
-                }
-                break;
-            case MouseEvent.BUTTON3:
-                if (this.model == null) {
-                    field.changeState();
-                }
+                    field.reveal();
+                } 
                 break;
             default:
                 break;

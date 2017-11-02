@@ -41,29 +41,6 @@ public class Model extends Observable {
     }
 
     /**
-     * Initialize everything
-     */
-    public void Init() {
-        //initialization as "lost"
-        this.state = "lost";
-        this.setChanged();
-        this.notifyObservers();
-        //reset all the fields
-        resetAllFields();
-        this.state = "running";
-        this.bombs_left = this.bombs;
-        this.revealed = 0;
-
-        buildGameBoard();
-        this.setChanged();
-        this.notifyObservers(true);
-
-    }
-
-
-    
-
-    /**
      * Creates the Gameboads
      */
     public void buildGameBoard() {
@@ -153,9 +130,7 @@ public class Model extends Observable {
                 ax = x + j;
 
                 if (ay >= 0 && ay < this.height && ax >= 0 && ax < this.width) {
-                    if (!this.field[ay][ax].isFlag()) {
                         this.field[ay][ax].reveal();
-                    }
                 }
 
             }
@@ -228,24 +203,6 @@ public class Model extends Observable {
     }
 
     /**
-     * Adds 1 to the remaining bombs
-     */
-    public void addRemainingBombs() {
-        this.bombs_left++;
-        this.setChanged();
-        this.notifyObservers();
-    }
-
-    /**
-     * Removes 1 of the remaining bombs
-     */
-    public void subRemainingBombs() {
-        this.bombs_left--;
-        this.setChanged();
-        this.notifyObservers();
-    }
-
-    /**
      * 
      * @return Heigth of the Game
      */
@@ -294,13 +251,4 @@ public class Model extends Observable {
     public int getBombs() {
         return this.bombs;
     }
-
-    /**
-     *
-     * @return number of remaining Bombs
-     */
-    public int remainingBombs() {
-        return this.bombs_left;
-    }
-
 }

@@ -67,11 +67,8 @@ public class ButtonView extends JButton implements Observer {
                 }
             }
         }
-        if (field.isFlag()) {
-            this.button.setText("!");
-            this.button.setBackground(Color.orange);
-        }
-        if (!field.isFlag() && !field.getRevealed()) {
+
+        if (!field.getRevealed()) {
             this.button.setText("");
             this.button.setBackground(new JButton().getBackground());
         }
