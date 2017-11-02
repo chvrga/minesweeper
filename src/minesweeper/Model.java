@@ -18,10 +18,6 @@ public class Model extends Observable {
     private int bombs_left;
     private String state;
     private int revealed;
-    private Thread thread;	//Thread for Timer
-    private int timer;		//Time for Timer as int
-    private boolean running;	//boolean running for terminating the thread
-
     /**
      * Constructor
      *
@@ -38,10 +34,7 @@ public class Model extends Observable {
         this.bombs = bombs;
         this.bombs_left = bombs;
         this.revealed = 0;
-        this.timer = 0;
         this.state = "running";
-        this.running = false;
-        this.thread = new Thread();
 
         buildGameBoard();
 
@@ -61,53 +54,14 @@ public class Model extends Observable {
         this.bombs_left = this.bombs;
         this.revealed = 0;
 
-        resetThread();
         buildGameBoard();
         this.setChanged();
         this.notifyObservers(true);
 
     }
 
-    /**
-     * Creates the Thread for the Timer
-     */
-    private void setThread() {
 
-        this.thread = new Thread() {
-            @SuppressWarnings("static-access")
-            //if running = true timer increments every second by 1
-            @Override
-            public void run() {
-                while (running) {
-
-                    try {
-
-                        addTimer();
-                        setChanged();
-                        notifyObservers();
-                        this.sleep(1000);
-
-                    } catch (InterruptedException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-
-                }
-
-            }
-        };
-        this.thread.start();
-
-    }
-
-    /**
-     * Sets the timer
-     */
-    public void addTimer() {
-        this.timer++;
-        this.setChanged();
-        this.notifyObservers();
-    }
+    
 
     /**
      * Creates the Gameboads
@@ -292,40 +246,6 @@ public class Model extends Observable {
     }
 
     /**
-     * Starts Thread
-     */
-    public void startThread() {
-        this.running = true;
-        this.setThread();
-    }
-
-    /**
-     * Resetzts the Threads timer
-     */
-    public void resetThread() {
-        this.running = false;
-        this.timer = 0;
-        this.setChanged();
-        this.notifyObservers();
-    }
-
-    /**
-     * Stops the Thread
-     */
-    public void stopThread() {
-        this.running = false;
-
-    }
-
-    /**
-     *
-     * @return Timer Thread
-     */
-    public Thread getThread() {
-        return this.thread;
-    }
-
-    /**
      * 
      * @return Heigth of the Game
      */
@@ -381,14 +301,6 @@ public class Model extends Observable {
      */
     public int remainingBombs() {
         return this.bombs_left;
-    }
-
-    /**
-     * 
-     * @return the Timer
-     */
-    public int getTimer() {
-        return this.timer;
     }
 
 }

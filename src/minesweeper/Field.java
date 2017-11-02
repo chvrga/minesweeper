@@ -56,10 +56,6 @@ public class Field extends Observable {
      */
     public void reveal() {
         if (model.getState().equals("running")) {
-            if (!this.model.getThread().isAlive()) {
-                this.model.startThread();
-            }
-
             if (this.field_id == 9) {
                 this.model.setState("lost");
 
@@ -78,10 +74,6 @@ public class Field extends Observable {
             }
         }
 
-        if (!model.getState().equals("running")) {
-            this.model.stopThread();
-        }
-
     }
 
     /**
@@ -90,9 +82,6 @@ public class Field extends Observable {
     public void changeState() {
         if (!this.is_flag && !this.getRevealed() && model.getState().equals("running")) {
 
-            if (!this.model.getThread().isAlive()) {
-                this.model.startThread();
-            }
             this.is_flag = true;
             this.model.subRemainingBombs();
             this.setChanged();
@@ -104,9 +93,6 @@ public class Field extends Observable {
             this.notifyObservers();
         }
 
-        if (!model.getState().equals("running")) {
-            this.model.stopThread();
-        }
     }
 
     /**
